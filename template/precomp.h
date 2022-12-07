@@ -850,6 +850,11 @@ inline int3 abs( const int3& v ) { return make_int3( abs( v.x ), abs( v.y ), abs
 inline int4 abs( const int4& v ) { return make_int4( abs( v.x ), abs( v.y ), abs( v.z ), abs( v.w ) ); }
 
 inline float3 reflect( const float3& i, const float3& n ) { return i - 2.0f * n * dot( n, i ); }
+inline float3 refract(const float3& i, const float3& n, float refractRate) {
+	float cosTheta = -dot(i, n);
+	float cosThetaP = sqrt(1 - refractRate * refractRate * (1 - cosTheta * cosTheta));
+	return -cosThetaP * n + refractRate * (i + cosTheta * n);
+}
 
 inline float3 cross( const float3& a, const float3& b ) { return make_float3( a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x ); }
 

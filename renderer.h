@@ -5,10 +5,14 @@ namespace Tmpl8
 
 class Renderer : public TheApp
 {
+	const double BRIGHTNESS = 2.0f * 3.1415926f;
+
 public:
 	// game flow methods
 	void Init();
-	float3 Trace( Ray& ray );
+	float3 Trace( Ray& ray, int sample );
+	float3 PathTrace(Ray& ray, int iter);
+
 	void Tick( float deltaTime );
 	void Shutdown() { /* implement if you want to do something on exit */ }
 	// input handling
@@ -23,6 +27,7 @@ public:
 	float4* accumulator;
 	Scene scene;
 	Camera camera;
+	float sample;
 };
 
 } // namespace Tmpl8
